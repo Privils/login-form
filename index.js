@@ -21,7 +21,7 @@ form.addEventListener('submit', function (e) {
   //for  Storing data in localStorage
   localStorage.setItem('userData', JSON.stringify(userData));
 
-  alert("Form submitted and data saved to localStorage!");
+  alert("Thank You For Your Participation");
 
   //for clearing form
   form.reset();
