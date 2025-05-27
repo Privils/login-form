@@ -1,39 +1,31 @@
-const username = document.querySelector('#username');
-const name = document.querySelector('#name');
-const surname = document.querySelector('#surname');
-const email = document.querySelector('#email');
-const password = document.querySelector('#password');
-const button = document.querySelector(".btn");
+const form = document.querySelector('.signup-form');
 
-const CheckValidation = () => {
-  if (
-    username.value.trim() === '' ||
-    name.value.trim() === '' ||
-    surname.value.trim() === '' ||
-    email.value.trim() === '' ||
-    password.value.trim() === ''
-  ) {
-    alert("Please fill in all the information.");
-    return false;
+form.addEventListener('submit', function (e) {
+  e.preventDefault();
+
+  const userData = {
+    username: document.querySelector('#username').value.trim(),
+    name: document.querySelector('#name').value.trim(),
+    surname: document.querySelector('#surname').value.trim(),
+    email: document.querySelector('#email').value.trim(),
+    password: document.querySelector('#password').value.trim(),
+  };
+
+  // Validation field
+  const isEmpty = Object.values(userData).some(value => value === '');
+  if (isEmpty) {
+    alert("Please fill in all the fields.");
+    return;
   }
-  return true;
-};
-const clearForm = () => {
-  username.value = '';
-  name.value = '';
-  surname.value = '';
-  email.value = '';
-  password.value = '';
-};
-const handleSubmit = () => {
-  button.addEventListener('click', (e) => {
-    e.preventDefault(); // Prevent form from submitting by default
-    const isValid = CheckValidation();
-    if (isValid) {
-      alert("Thank You For Signing Up With Us");
-      clearForm();
-    }
-  });
-};
 
-handleSubmit();
+  //for  Storing data in localStorage
+  localStorage.setItem('userData', JSON.stringify(userData));
+
+  alert("Form submitted and data saved to localStorage!");
+
+  //for clearing form
+  form.reset();
+});
+
+const savedData = JSON.parse(localStorage.getItem('userData'));
+console.log(savedData);
